@@ -51,9 +51,16 @@ body {
    height: 20px;
    width: 120px;
    border-radius: 10px;
-   background-color: rgb(89, 209, 89);
-   border: 3px solid black;
+   background-color: gray;
+   border: 2px solid black;
 }
+.progress-bar {
+  background-color: rgb(89, 209, 89);
+  height: 16px;
+  border-radius: 10px;
+  width: 116px;
+}
+
 .switch-sound{
   position: absolute;
   top: 30px;
