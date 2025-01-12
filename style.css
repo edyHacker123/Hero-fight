@@ -73,3 +73,9 @@ body {
   cursor: pointer;
   font-size: 18px;
 }
+.countdown{
+  position: absolute;
+  z-index: 1;
+  top:50%;
+  left:50%;
+}

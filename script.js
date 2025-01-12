@@ -6,6 +6,7 @@ const healthBarHero1 = document.querySelector(".health-bar-hero1");
 const healthBarHero2 = document.querySelector(".health-bar-hero2");
 const progressBarHero1 = document.querySelector(".progress-bar-hero1");
 const progressBarHero2 = document.querySelector(".progress-bar-hero2");
+const countdown = document.querySelector(".countdown");
 
 const hero1Move = [
   "./images/hero1/move_1.png",
@@ -51,8 +52,10 @@ healthBarHero2.style.left = "700px";
 healthBarHero2.style.bottom = "270px";
 progressBarHero1.style.width = "116px";
 progressBarHero2.style.width = "116px";
+countdown.style.transform = "translate(-50%,-50%)";
 let hero1Touch = false;
 let hero2Touch = false;
+let countdownNumber = 3;
 
 const heroMovement = (direction, hero, frames) => {
   if (direction === "right") {
@@ -147,6 +150,26 @@ const hitHero = (progressBarHero, healthBarHero, hero, heroKill) => {
   }
 };
 
+const startGame = () => {
+  let size = 2;
+  for (let i = 0; i < 200; i++) {
+    setTimeout(() => {
+      size = size - 0.01;
+      countdown.style.transform = "translate(-50%,-50%)" + `scale(${size})`;
+    }, 7 * i);
+  }
+  setTimeout(() => {
+    countdownNumber--;
+    countdown.src = `./images/countdown/${countdownNumber}.png`;
+    if (countdownNumber === 0) {
+      countdown.src = "./images/countdown/fight.png";
+      countdown.style.transform = "translate(-50%,-50%) scale(0.4)";
+    } else {
+      startGame();
+    }
+  }, 1400);
+};
+
 window.addEventListener("keydown", (event) => {
   if (event.key === "d" && parseInt(progressBarHero1.style.width) !== 0) {
     if (parseInt(hero1.style.left) <= 680) {
@@ -210,3 +233,5 @@ switchSoundButton.addEventListener("click", () => {
     backgroundSound.pause();
   }
 });
+
+startGame();
