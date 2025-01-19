@@ -79,3 +79,43 @@ body {
   top:50%;
   left:50%;
 }
+.start-game-layout {
+  width: 920px;
+  height: 580px;
+  background-color: rgb(87, 79, 79);
+  z-index: 99;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.hero2-start{
+  transform: scaleX(-1)
+}
+.description-wrapper{
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  justify-content: space-around;
+}
+h1 {
+  font-family: "Silkscreen", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 45px;
+  color:orange;
+  text-shadow: -1px 5px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
+}
+.start-btn{
+  background-color: rgb(160, 54, 54);
+  border: none;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  color:white;
+  padding: 14px 0;
+  cursor: pointer;
+}
+.start-btn:hover {
+  background-color: rgb(197, 68, 68);
+}
