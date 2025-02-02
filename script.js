@@ -1,14 +1,34 @@
-const backgroundSound = document.querySelector(".my-audio");
-const switchSoundButton = document.querySelector(".switch-sound");
-const hero1 = document.querySelector(".hero1");
-const hero2 = document.querySelector(".hero2");
-const healthBarHero1 = document.querySelector(".health-bar-hero1");
-const healthBarHero2 = document.querySelector(".health-bar-hero2");
-const progressBarHero1 = document.querySelector(".progress-bar-hero1");
-const progressBarHero2 = document.querySelector(".progress-bar-hero2");
-const countdown = document.querySelector(".countdown");
-const startGameLayout = document.querySelector(".start-game-layout");
-const startBtn = document.querySelector(".start-btn");
+import { heroPunchAnimation } from "./animations.js";
+import { heroMovement, healthBarMove } from "./movement.js";
+import { heroTouch } from "./mechanics.js";
+import dataGame from "./dataGame.js";
+const {
+  hero1,
+  backgroundSound,
+  switchSoundButton,
+  hero2,
+  healthBarHero1,
+  healthBarHero2,
+  progressBarHero1,
+  progressBarHero2,
+  countdown,
+  startGameLayout,
+  startBtn,
+  hero1Touch,
+  hero2Touch,
+} = dataGame;
+
+// const backgroundSound = document.querySelector(".my-audio");
+// const switchSoundButton = document.querySelector(".switch-sound");
+// const hero1 = document.querySelector(".hero1");
+// const hero2 = document.querySelector(".hero2");
+// const healthBarHero1 = document.querySelector(".health-bar-hero1");
+// const healthBarHero2 = document.querySelector(".health-bar-hero2");
+// const progressBarHero1 = document.querySelector(".progress-bar-hero1");
+// const progressBarHero2 = document.querySelector(".progress-bar-hero2");
+// const countdown = document.querySelector(".countdown");
+// const startGameLayout = document.querySelector(".start-game-layout");
+// const startBtn = document.querySelector(".start-btn");
 
 hero1.style.left = "50px";
 hero2.style.left = "650px";
@@ -19,8 +39,8 @@ healthBarHero2.style.bottom = "270px";
 progressBarHero1.style.width = "116px";
 progressBarHero2.style.width = "116px";
 countdown.style.transform = "translate(-50%,-50%)";
-let hero1Touch = false;
-let hero2Touch = false;
+// let hero1Touch = false;
+// let hero2Touch = false;
 let countdownNumber = 3;
 let gameOn = false;
 
@@ -60,79 +80,19 @@ const hero1Kill = [
   "./images/hero1/kill3.png",
 ];
 
-const heroMovement = (direction, hero, frames) => {
-  if (direction === "right") {
-    hero.style.transform = "scaleX(1)";
-  } else {
-    hero.style.transform = "scaleX(-1)";
-  }
-  for (let i = 0; i < frames.length; i++) {
-    setTimeout(() => {
-      hero.src = frames[i];
-    }, i * 90);
-  }
-  for (let i = 0; i < 7; i++) {
-    setTimeout(() => {
-      if (direction === "right") {
-        hero.style.left = parseInt(hero.style.left) + 10 + "px";
-      } else {
-        hero.style.left = parseInt(hero.style.left) - 10 + "px";
-      }
-    }, i * 6);
-  }
-};
+const hero1Kick = [
+  "./images/hero1/kick1.png",
+  "./images/hero1/kick2.png",
+  "./images/hero1/kick3.png",
+  "./images/hero1/frame_1.png",
+];
 
-const healthBarMove = (healthBar, direction, hero) => {
-  if (direction === "right") {
-    healthBar.style.left = parseInt(hero.style.left) + 120 + "px";
-  } else {
-    healthBar.style.left = parseInt(hero.style.left) - 20 + "px";
-  }
-};
-
-const heroPunchAnimation = (hero, listAnimation) => {
-  for (let i = 0; i < listAnimation.length; i++) {
-    setTimeout(() => {
-      hero.src = listAnimation[i];
-    }, i * 80);
-  }
-};
-
-const heroTouch = (direction, heroTouch) => {
-  const touch = parseInt(hero2.style.left) - parseInt(hero1.style.left);
-
-  if (touch <= 110 && touch > -30 && direction === "right") {
-    if (heroTouch === "hero1") {
-      hero1Touch = true;
-    }
-    if (heroTouch === "hero2") {
-      hero2Touch = true;
-    }
-  } else if (direction === "right") {
-    if (heroTouch === "hero1") {
-      hero1Touch = false;
-    }
-    if (heroTouch === "hero2") {
-      hero2Touch = false;
-    }
-  }
-
-  if (touch < 40 && touch >= -100 && direction === "left") {
-    if (heroTouch === "hero1") {
-      hero1Touch = true;
-    }
-    if (heroTouch === "hero2") {
-      hero2Touch = true;
-    }
-  } else if (direction === "left") {
-    if (heroTouch === "hero1") {
-      hero1Touch = false;
-    }
-    if (heroTouch === "hero2") {
-      hero2Touch = false;
-    }
-  }
-};
+const hero2Kick = [
+  "./images/hero2/kick1.png",
+  "./images/hero2/kick2.png",
+  "./images/hero2/kick3.png",
+  "./images/hero2/Frame_1.png",
+];
 
 const hitHero = (progressBarHero, healthBarHero, hero, heroKill) => {
   if (progressBarHero.style.width === "8.4px") {
@@ -244,6 +204,20 @@ window.addEventListener("keydown", (event) => {
       healthBarHero2.style.zIndex = "1";
       healthBarHero1.style.zIndex = "2";
       hitHero(progressBarHero1, healthBarHero1, hero1, hero1Kill);
+    }
+  }
+  if (event.key === "x") {
+    for (let i = 0; i < hero1Kick.length; i++) {
+      setTimeout(() => {
+        hero1.src = hero1Kick[i];
+      }, i * 80);
+    }
+  }
+  if (event.key === "n") {
+    for (let i = 0; i < hero2Kick.length; i++) {
+      setTimeout(() => {
+        hero2.src = hero2Kick[i];
+      }, i * 80);
     }
   }
 });
