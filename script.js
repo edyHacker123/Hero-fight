@@ -28,6 +28,18 @@ let hero2Touch = false;
 let countdownNumber = 3;
 let gameOn = false;
 
+const defeatedHero1 = [
+  "./images/hero1/frame_1.png",
+  "./images/hero1/defeat_1.png",
+  "./images/hero1/defeat_2.png",
+];
+
+const defeatedHero2 = [
+  "./images/hero2/frame_1.png",
+  "./images/hero2/defeat_1.png",
+  "./images/hero2/defeat_2.png",
+];
+
 const hero1Move = [
   "./images/hero1/move_1.png",
   "./images/hero1/move_2.png",
@@ -75,7 +87,7 @@ const hero2Kick = [
   "./images/hero2/Frame_1.png",
 ];
 const pressKeys = {
-  ms: true,
+  m: true,
   d: true,
   a: true,
   ArrowLeft: true,
@@ -83,6 +95,22 @@ const pressKeys = {
   c: true,
   x: true,
   n: true,
+};
+
+const finishGame = (hero, defeatedHero, defeatedImages) => {
+  hero.style.left = "300px";
+  hero.style.transform = "scaleX(1)";
+  gameOn = false;
+  defeatedHero.style.left = "470px";
+  defeatedHero.src = defeatedImages[0];
+  defeatedHero.style.transform = "scaleX(-1)";
+  setTimeout(() => {
+    for (let i = 1; i < defeatedImages.length; i++) {
+      setTimeout(() => {
+        defeatedHero.src = defeatedImages[i];
+      }, 450 * i);
+    }
+  }, 500);
 };
 
 const hitHero = (progressBarHero, healthBarHero, hero, heroKill) => {
@@ -94,13 +122,24 @@ const hitHero = (progressBarHero, healthBarHero, hero, heroKill) => {
         hero.src = heroKill[i];
       }, 130 * i);
     }
-  } else {
-    progressBarHero.style.width =
-      parseInt(progressBarHero.style.width) - 11.6 + "px";
-    hero.style.filter = "sepia(1) hue-rotate(-30deg) saturate(7)";
     setTimeout(() => {
-      hero.style.filter = "";
-    }, 150);
+      if (progressBarHero1.style.width === "0px") {
+        finishGame(hero2, hero1, defeatedHero1);
+        healthBarHero2.style.visibility = "hidden";
+      } else {
+        finishGame(hero1, hero2, defeatedHero2);
+        healthBarHero1.style.visibility = "hidden";
+      }
+    }, 1000);
+  } else {
+    if (parseInt(progressBarHero.style.width) > 0) {
+      progressBarHero.style.width =
+        parseInt(progressBarHero.style.width) - 11.6 + "px";
+      hero.style.filter = "sepia(1) hue-rotate(-30deg) saturate(7)";
+      setTimeout(() => {
+        hero.style.filter = "";
+      }, 150);
+    }
   }
 };
 
@@ -209,20 +248,40 @@ window.addEventListener("keydown", (event) => {
       hitHero(progressBarHero2, healthBarHero2, hero2, hero2Kill);
     }
   }
-  if (event.key === "x" && pressKeys.x) {
+  if (
+    event.key === "x" &&
+    pressKeys.x &&
+    parseInt(progressBarHero1.style.width) !== 0 &&
+    gameOn
+  ) {
     pressKeys.x = false;
     for (let i = 0; i < hero1Kick.length; i++) {
       setTimeout(() => {
         hero1.src = hero1Kick[i];
       }, i * 80);
     }
+    if (hero1Touch === true || hero2Touch === true) {
+      healthBarHero2.style.zIndex = "1";
+      healthBarHero1.style.zIndex = "2";
+      hitHero(progressBarHero2, healthBarHero2, hero2, hero2Kill);
+    }
   }
-  if (event.key === "n" && pressKeys.n) {
+  if (
+    event.key === "n" &&
+    pressKeys.n &&
+    parseInt(progressBarHero2.style.width) !== 0 &&
+    gameOn
+  ) {
     pressKeys.n = false;
     for (let i = 0; i < hero2Kick.length; i++) {
       setTimeout(() => {
         hero2.src = hero2Kick[i];
       }, i * 80);
+    }
+    if (hero1Touch === true || hero2Touch === true) {
+      healthBarHero2.style.zIndex = "2";
+      healthBarHero1.style.zIndex = "1";
+      hitHero(progressBarHero1, healthBarHero1, hero1, hero1Kill);
     }
   }
 });
