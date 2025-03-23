@@ -13,6 +13,8 @@ const progressBarHero2 = document.querySelector(".progress-bar-hero2");
 const countdown = document.querySelector(".countdown");
 const startGameLayout = document.querySelector(".start-game-layout");
 const startBtn = document.querySelector(".start-btn");
+const playerWonTitle = document.querySelector(".player-won-title");
+const retryBtn = document.querySelector(".retry");
 
 hero1.style.left = "50px";
 hero2.style.left = "650px";
@@ -111,6 +113,34 @@ const finishGame = (hero, defeatedHero, defeatedImages) => {
       }, 450 * i);
     }
   }, 500);
+  setTimeout(() => {
+    playerWonTitle.style.display = "block";
+    playerWonTitle.innerHTML = hero.getAttribute("hero-name") + " has won!";
+    retryBtn.style.display = "flex";
+
+    retryBtn.addEventListener("click", () => {
+      retryBtn.style.display = "none";
+      playerWonTitle.style.display = "none";
+      hero1.style.left = "50px";
+      hero2.style.left = "650px";
+      hero1.style.transform = "scaleX(1)";
+      hero2.style.transform = "scaleX(-1)";
+      healthBarHero1.style.left = "100px";
+      healthBarHero1.style.bottom = "270px";
+      healthBarHero2.style.left = "700px";
+      healthBarHero2.style.bottom = "270px";
+      progressBarHero1.style.width = "116px";
+      progressBarHero2.style.width = "116px";
+      healthBarHero1.style.visibility = "visible";
+      healthBarHero2.style.visibility = "visible";
+      hero1.src = "./images/hero1/frame_1.png";
+      hero2.src = "./images/hero2/frame_1.png";
+      countdown.style.display = "block";
+      countdown.src = "./images/countdown/3.png";
+      countdownNumber = 3;
+      startGame();
+    });
+  }, 1850);
 };
 
 const hitHero = (progressBarHero, healthBarHero, hero, heroKill) => {

@@ -106,6 +106,15 @@ h1 {
   color:orange;
   text-shadow: -1px 5px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
 }
+.player-won-title {
+  position: absolute;
+  z-index: 3;
+  top:20%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  white-space: nowrap;
+}
 .start-btn{
   background-color: rgb(160, 54, 54);
   border: none;
@@ -118,4 +127,28 @@ h1 {
 }
 .start-btn:hover {
   background-color: rgb(197, 68, 68);
+}
+.retry{
+  position: absolute;
+  z-index: 3;
+  top:40%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: orange;
+  cursor: pointer;
+  display: none;
+}
+.retry img {
+  width: 20px;
+  height: 20px;
+}
+.retry p {
+  font-family: "Silkscreen", serif;
+  font-size: 20px;
+  font-weight: 600;
 }
