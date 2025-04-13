@@ -152,3 +152,74 @@ h1 {
   font-size: 20px;
   font-weight: 600;
 }
+
+.select-player-layout {
+  width: 920px;
+  height: 580px;
+  background-color: rgb(87, 79, 79);
+  z-index: 99;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap:50px;
+}
+.players-wrapper {
+  display: flex;
+}
+.hero-choose {
+  position: relative;
+}
+.hero-choose img {
+  width: 200px;
+  height: 200px;
+}
+.hero-choose:hover{
+  outline: 5px solid rgb(158, 105, 6);
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.253);
+}
+
+.hero-choose::after {
+  content: 'SELECT';
+  position: absolute;
+  top:110%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  font-family: "Silkscreen", serif;
+  color:orange;
+  font-size: 24px;
+  text-shadow: 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
+  opacity: 0;
+}
+
+.hero-choose:hover::after {
+  opacity: 1;
+}
+.player-1-name{
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  width: 300px;
+  font-size: 18px;
+}
+.next-btn{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: orange;
+  cursor: pointer;
+  width: 150px;
+  font-size: 18px;
+}
+
+.next-btn p {
+  width: 100%;
+  text-align: center;
+}
+
+

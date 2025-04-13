@@ -137,6 +137,7 @@ const finishGame = (hero, defeatedHero, defeatedImages) => {
       hero2.src = "./images/hero2/frame_1.png";
       countdown.style.display = "block";
       countdown.src = "./images/countdown/3.png";
+      countdown.style.transform = "";
       countdownNumber = 3;
       startGame();
     });
@@ -190,6 +191,33 @@ const startGame = () => {
       setTimeout(() => {
         countdown.style.display = "none";
         gameOn = true;
+        // retryBtn.addEventListener(
+        //   "click",
+        //   () => {
+        //     retryBtn.style.display = "none";
+        //     playerWonTitle.style.display = "none";
+        //     hero1.style.left = "50px";
+        //     hero2.style.left = "650px";
+        //     hero1.style.transform = "scaleX(1)";
+        //     hero2.style.transform = "scaleX(-1)";
+        //     healthBarHero1.style.left = "100px";
+        //     healthBarHero1.style.bottom = "270px";
+        //     healthBarHero2.style.left = "700px";
+        //     healthBarHero2.style.bottom = "270px";
+        //     progressBarHero1.style.width = "116px";
+        //     progressBarHero2.style.width = "116px";
+        //     healthBarHero1.style.visibility = "visible";
+        //     healthBarHero2.style.visibility = "visible";
+        //     hero1.src = "./images/hero1/frame_1.png";
+        //     hero2.src = "./images/hero2/frame_1.png";
+        //     countdown.style.display = "block";
+        //     countdown.src = "./images/countdown/3.png";
+        //     countdown.style.transform = "";
+        //     countdownNumber = 3;
+        //     startGame();
+        //   },
+        //   true
+        // );
       }, 1000);
     } else {
       startGame();
